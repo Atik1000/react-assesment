@@ -2,7 +2,7 @@
 
 import { Card, Typography } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo } from "react";
+import { useEffect, useRef } from "react";
 import { ErrorState } from "@/components/error-state";
 import { LoadingSkeleton } from "@/components/loading-skeleton";
 import { ProductFilters } from "@/features/products/components/product-filters";
@@ -21,6 +21,7 @@ function parsePositiveNumber(value: string | null, fallback: number) {
 export function ProductsPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const hasHydratedFromUrl = useRef(false);
 
   const {
     searchTerm,
@@ -34,24 +35,20 @@ export function ProductsPageContent() {
     hydrateFilters,
   } = useProductsFilterStore();
 
-  const queryState = useMemo(
-    () => ({
-      page: parsePositiveNumber(searchParams.get("page"), currentPage),
-      limit: parsePositiveNumber(searchParams.get("limit"), pageSize),
-      search: searchParams.get("search") ?? "",
-      category: searchParams.get("category") ?? "",
-    }),
-    [searchParams, currentPage, pageSize]
-  );
-
   useEffect(() => {
+    if (hasHydratedFromUrl.current) {
+      return;
+    }
+
     hydrateFilters({
-      currentPage: queryState.page,
-      pageSize: queryState.limit,
-      searchTerm: queryState.search,
-      selectedCategory: queryState.category,
+      currentPage: parsePositiveNumber(searchParams.get("page"), 1),
+      pageSize: parsePositiveNumber(searchParams.get("limit"), 10),
+      searchTerm: searchParams.get("search") ?? "",
+      selectedCategory: searchParams.get("category") ?? "",
     });
-  }, [hydrateFilters, queryState]);
+
+    hasHydratedFromUrl.current = true;
+  }, [hydrateFilters, searchParams]);
 
   useEffect(() => {
     const nextParams = new URLSearchParams();
