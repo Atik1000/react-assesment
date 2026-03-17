@@ -35,7 +35,7 @@ export function EditProductDrawer({
   return (
     <Drawer
       title="Edit Product"
-      width={480}
+      size={480}
       open={open}
       onClose={onClose}
       destroyOnClose

@@ -8,6 +8,7 @@ import {
   mockUpdateProduct,
 } from "@/features/products/services/products.service";
 import {
+  ProductCategory,
   Product,
   ProductFilters,
   ProductsResponse,
@@ -30,7 +31,7 @@ export function useProductsQuery(filters: ProductFilters) {
 }
 
 export function useCategoriesQuery() {
-  return useQuery<string[]>({
+  return useQuery<ProductCategory[]>({
     queryKey: productQueryKeys.categories(),
     queryFn: getProductCategories,
   });

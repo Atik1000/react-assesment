@@ -2,11 +2,12 @@
 
 import { CategorySelect } from "@/components/category-select";
 import { SearchInput } from "@/components/search-input";
+import { ProductCategory } from "@/features/products/types/product.types";
 
 interface ProductFiltersProps {
   searchTerm: string;
   selectedCategory: string;
-  categories: string[];
+  categories: ProductCategory[];
   onSearchChange: (value: string) => void;
   onCategoryChange: (value: string) => void;
 }

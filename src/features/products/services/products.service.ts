@@ -1,5 +1,6 @@
 import { apiClient } from "@/lib/api-client";
 import {
+  ProductCategory,
   Product,
   ProductFilters,
   ProductsResponse,
@@ -42,8 +43,20 @@ export async function getProductById(id: number): Promise<Product> {
   return apiClient<Product>(`/products/${id}`);
 }
 
-export async function getProductCategories(): Promise<string[]> {
-  return apiClient<string[]>("/products/categories");
+export async function getProductCategories(): Promise<ProductCategory[]> {
+  const payload = await apiClient<Array<string | ProductCategory>>("/products/categories");
+
+  return payload.map((item) => {
+    if (typeof item === "string") {
+      return {
+        slug: item,
+        name: item,
+        url: `/products/category/${encodeURIComponent(item)}`,
+      };
+    }
+
+    return item;
+  });
 }
 
 export async function mockUpdateProduct(payload: UpdateProductPayload): Promise<UpdateProductPayload> {

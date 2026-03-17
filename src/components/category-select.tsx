@@ -1,10 +1,11 @@
 "use client";
 
 import { Select } from "antd";
+import { ProductCategory } from "@/features/products/types/product.types";
 
 interface CategorySelectProps {
   value: string;
-  categories: string[];
+  categories: ProductCategory[];
   onChange: (value: string) => void;
 }
 
@@ -18,8 +19,8 @@ export function CategorySelect({ value, categories, onChange }: CategorySelectPr
       allowClear
       onChange={(nextValue) => onChange(nextValue ?? "")}
       options={categories.map((category) => ({
-        value: category,
-        label: category,
+        value: category.slug,
+        label: category.name,
       }))}
     />
   );
