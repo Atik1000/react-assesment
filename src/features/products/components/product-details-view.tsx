@@ -23,10 +23,10 @@ export function ProductDetailsView({ product, onEditClick }: ProductDetailsViewP
       <HeaderPanel>
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <Typography.Title level={2} className="!mb-1 !font-heading">
+            <Typography.Title level={2} className="mb-1! font-heading!">
               {product.title}
             </Typography.Title>
-            <Typography.Paragraph type="secondary" className="!mb-0">
+            <Typography.Paragraph type="secondary" className="mb-0!">
               {product.description}
             </Typography.Paragraph>
           </div>
@@ -41,7 +41,7 @@ export function ProductDetailsView({ product, onEditClick }: ProductDetailsViewP
           <Carousel autoplay>
             {product.images.map((image, index) => (
               <div key={`${product.id}-${index}`}>
-                <div className="relative h-[360px] w-full overflow-hidden rounded-xl bg-[#f5f8f6]">
+                <div className="relative h-90 w-full overflow-hidden rounded-xl bg-[#f5f8f6]">
                   <Image
                     src={image}
                     alt={`${product.title} image ${index + 1}`}

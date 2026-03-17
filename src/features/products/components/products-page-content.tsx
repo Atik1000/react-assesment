@@ -106,10 +106,10 @@ export function ProductsPageContent() {
   return (
     <div className="space-y-5">
       <Card className="border-[#dbe6df] shadow-sm">
-        <Typography.Title level={3} className="!mb-1 !font-heading">
+        <Typography.Title level={3} className="mb-1! font-heading!">
           Product Explorer
         </Typography.Title>
-        <Typography.Paragraph type="secondary" className="!mb-0">
+        <Typography.Paragraph type="secondary" className="mb-0!">
           Browse products with synchronized filters, pagination, and resilient caching.
         </Typography.Paragraph>
       </Card>
