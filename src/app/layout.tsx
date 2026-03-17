@@ -28,11 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${headingFont.variable} ${bodyFont.variable} antialiased`}>
-        <StyledComponentsRegistry>
-          <AntdRegistry>
+        <AntdRegistry>
+          <StyledComponentsRegistry>
             <Providers>{children}</Providers>
-          </AntdRegistry>
-        </StyledComponentsRegistry>
+          </StyledComponentsRegistry>
+        </AntdRegistry>
       </body>
     </html>
   );
